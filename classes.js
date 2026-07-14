@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 // function User(name, role = 'User') {
 //   this.name = name;
@@ -17,7 +17,6 @@
 // console.log(
 //   bob.getInfo()
 // );
-
 
 // class Human {
 //   friends = [];
@@ -41,38 +40,71 @@
 //   bob.getInfo()
 // );
 
-class BankAccaount {
-  constructor(name, money) {
-    this.name = name;
-    this.money = money;
-    this.history = [`Initial: ${money}`]
+// class BankAccaount {
+//   constructor(name, money) {
+//     this.name = name;
+//     this.money = money;
+//     this.history = [`Initial: ${money}`]
+//   }
+
+//   getInfo() {
+//     return `Name: ${this.name}, Amount: ${this.money}`
+//   }
+
+//   addMoney(amount, info) {
+//     this.money += amount;
+
+//     this.history.push(`${info}: ${amount}`);
+//   }
+
+//   withdrawMoney(amount, info) {
+//     this.money -= amount;
+
+//     this.history.push(`${info}: ${amount}`);
+//   }
+
+//   getAccountHistory() {
+//     return this.history;
+//   }
+// }
+
+// const bob = new BankAccaount('Bob', 400);
+
+// bob.addMoney(100, "sale");
+// console.log(bob.getInfo());
+// console.log(bob.getAccountHistory());
+// bob.withdrawMoney(250, "buy new phone");
+// console.log(bob.getAccountHistory());
+
+class Calendar {
+
+  constructor() {
+    this.bookHistory = [];
   }
 
-  getInfo() {
-    return `Name: ${this.name}, Amount: ${this.money}`
-  }
 
-  addMoney(amount, info) {
-    this.money += amount;
+  book(start, end) {
+    if (start < end) {
+      if (this.bookHistory.length === 0) {
+        this.bookHistory.push([start,end]);
+        return true;
+      }
 
-    this.history.push(`${info}: ${amount}`);
-  }
-
-  withdrawMoney(amount, info) {
-    this.money -= amount;
-
-    this.history.push(`${info}: ${amount}`);
-  }
-
-  getAccountHistory() {
-    return this.history;
+      for (const booked of this.bookHistory) {
+        if (start >= booked[0] && start < booked[1]) {
+          return false;
+        } 
+        else if (start <= booked[0] && end > booked[1]) {
+          return false;
+        }
+      }
+          this.bookHistory.push([start,end]);
+          
+          return true;
+    }
   }
 }
 
-const bob = new BankAccaount('Bob', 400);
-
-bob.addMoney(100, "sale");
-console.log(bob.getInfo());
-console.log(bob.getAccountHistory());
-bob.withdrawMoney(250, "buy new phone");
-console.log(bob.getAccountHistory());
+newDate.book(5, 10);
+console.log(newDate.bookHistory);
+console.log(newDate.book(9,12));

@@ -76,35 +76,59 @@
 // bob.withdrawMoney(250, "buy new phone");
 // console.log(bob.getAccountHistory());
 
-class Calendar {
+// class Calendar {
 
-  constructor() {
-    this.bookHistory = [];
-  }
+//   constructor() {
+//     this.bookHistory = [];
+//   }
 
 
-  book(start, end) {
-    if (start < end) {
-      if (this.bookHistory.length === 0) {
-        this.bookHistory.push([start,end]);
-        return true;
-      }
+//   book(start, end) {
+//     if (start < end) {
+//       if (this.bookHistory.length === 0) {
+//         this.bookHistory.push([start,end]);
+//         return true;
+//       }
 
-      for (const booked of this.bookHistory) {
-        if (start >= booked[0] && start < booked[1]) {
-          return false;
-        } 
-        else if (start <= booked[0] && end > booked[1]) {
-          return false;
-        }
-      }
-          this.bookHistory.push([start,end]);
+//       for (const booked of this.bookHistory) {
+//         if (start >= booked[0] && start < booked[1]) {
+//           return false;
+//         } 
+//         else if (start <= booked[0] && end > booked[1]) {
+//           return false;
+//         }
+//       }
+//           this.bookHistory.push([start,end]);
           
-          return true;
-    }
-  }
-}
+//           return true;
+//     }
+//   }
+// }
 
-newDate.book(5, 10);
-console.log(newDate.bookHistory);
-console.log(newDate.book(9,12));
+// newDate.book(5, 10);
+// console.log(newDate.bookHistory);
+// console.log(newDate.book(9,12));
+
+
+const obj = {
+  name: 'Cleaner-900',
+  score: 16
+};
+
+class BoardOfFame {
+  constructor(name, score) {
+    this.records = [];
+  }
+
+  addRecord(player) {
+    this.records.sort((a, b) => b.score - a.score);
+  }
+
+  list() {
+    return this.records
+  }
+  }
+
+const board = new BoardOfFame();
+board.addRecord({name: 'Cleaner-900', score: 6});
+console.log(board.list());

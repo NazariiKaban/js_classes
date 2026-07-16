@@ -82,7 +82,6 @@
 //     this.bookHistory = [];
 //   }
 
-
 //   book(start, end) {
 //     if (start < end) {
 //       if (this.bookHistory.length === 0) {
@@ -93,13 +92,13 @@
 //       for (const booked of this.bookHistory) {
 //         if (start >= booked[0] && start < booked[1]) {
 //           return false;
-//         } 
+//         }
 //         else if (start <= booked[0] && end > booked[1]) {
 //           return false;
 //         }
 //       }
 //           this.bookHistory.push([start,end]);
-          
+
 //           return true;
 //     }
 //   }
@@ -109,26 +108,45 @@
 // console.log(newDate.bookHistory);
 // console.log(newDate.book(9,12));
 
-
 const obj = {
-  name: 'Cleaner-900',
-  score: 16
+  name: "Cleaner-900",
+  score: 16,
 };
 
 class BoardOfFame {
-  constructor(name, score) {
-    this.records = [];
+  constructor(numberOfRobots = 3) {
+    this.numberOfRobots = numberOfRobots;
+    this.robots = [];
   }
 
-  addRecord(player) {
-    this.records.sort((a, b) => b.score - a.score);
+  addRecord(robot) {
+    const existingRobot = this.robots.find((rob) => rob.name === robot.name);
+
+    if (existingRobot && robot.score > existingRobot.score) {
+      existingRobot.score = robot.score;
+    } else if (existingRobot && robot.score < existingRobot.score) {
+      return false;
+    } else {
+      this.robots.push(robot);
+    }
+
+    this.robots.sort((a, b) => b.score - a.score);
+
+    if (this.robots.length > this.numberOfRobots) {
+      this.robots = this.robots.slice(0, this.numberOfRobots);
+      console.log("too much robots");
+    }
   }
 
   list() {
-    return this.records
+    return this.robots;
   }
-  }
+}
 
 const board = new BoardOfFame();
-board.addRecord({name: 'Cleaner-900', score: 6});
+board.addRecord({ name: "Cleaner-900", score: 6 });
+board.addRecord({ name: "Cleaner-900", score: 8 });
+board.addRecord({ name: "Cleaner-900", score: 4 });
+board.addRecord({ name: "Cleaner-901", score: 4 });
+board.addRecord({ name: "Cleaner-902", score: 4 });
 console.log(board.list());
